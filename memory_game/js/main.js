@@ -31,6 +31,7 @@ function checkForMatch(){
 			alert("Sorry, try again.");
 			console.log("Sorry, try again.");
 		}
+		cardsInPlay = [];
 	}
 }
 
@@ -43,5 +44,27 @@ function flipCard(cardId){
 	checkForMatch();
 }
 
-flipCard(0);
-flipCard(2);
+function createBoard(){
+	var gameBoard = document.getElementById('game-board');
+	for (let i = 0; i < cards.length; i++){
+		var cardElement = document.createElement('img');
+		cardElement.setAttribute('src', 'images/back.png');
+		cardElement.setAttribute('data-id', i);
+		gameBoard.appendChild(cardElement);
+	};
+	var images  = gameBoard.querySelectorAll('img');
+	for (let i = 0; i < images.length; i++){
+		var image = images[i]
+		image.addEventListener('click', function() {
+			var cardId = this.getAttribute('data-id');
+			console.log(1);
+			this.setAttribute('src', cards[cardId].cardImage);
+			console.log(2);
+			flipCard(cardId);
+			console.log(3);
+		});
+	}
+	console.log(gameBoard);
+}
+
+createBoard();
